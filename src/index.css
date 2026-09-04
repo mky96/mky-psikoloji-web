@@ -1,0 +1,211 @@
+:root {
+  /* HubermanLab İlhamlı Renk Paleti - Aydınlık / Soft Mod */
+  --bg-primary: #f0f4f2; /* Sakinleştirici Buz Adaçayı Zemin */
+  --bg-secondary: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-glass-heavy: rgba(255, 255, 255, 0.95);
+  --text-primary: #0f1914; /* Derin Koyu Antrasit-Yeşil */
+  --text-secondary: #4a6358;
+  --accent-gold: #c5a880; /* Yumuşak Lüks Altın */
+  --accent-gold-hover: #b0926a;
+  --accent-burgundy: #2d6a4f; /* Derin Orman / Şifa Yeşili */
+  --accent-burgundy-hover: #1b4332;
+  --border-color: rgba(45, 106, 79, 0.18);
+  --shadow-color: rgba(15, 25, 20, 0.05);
+  --transition-speed: 0.35s;
+}
+
+[data-theme='dark'] {
+  /* HubermanLab İlhamlı Renk Paleti - Gece / Sofistike Koyu Mod (Varsayılan Huberman Tarzı) */
+  --bg-primary: #0b110e; /* Derin Gece Antrasiti / Huberman Dark */
+  --bg-secondary: #121c17;
+  --bg-glass: rgba(18, 28, 23, 0.8);
+  --bg-glass-heavy: rgba(18, 28, 23, 0.95);
+  --text-primary: #e6ebf1; /* Yumuşak Buz Beyazı */
+  --text-secondary: #8ea89c; /* Soft Zümrüt Gri */
+  --accent-gold: #d4af37; /* Parlak Kehribar Altın */
+  --accent-gold-hover: #f3cf65;
+  --accent-burgundy: #40916c; /* Canlı Şifa Yeşili */
+  --accent-burgundy-hover: #52b788;
+  --border-color: rgba(212, 175, 55, 0.22);
+  --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  overflow-x: hidden;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, .brand-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+/* Glassmorphism Huberman Paneller */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 35px 0 var(--shadow-color);
+}
+
+.glass-heavy {
+  background: var(--bg-glass-heavy);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 15px 45px 0 var(--shadow-color);
+}
+
+/* Sofistike Editoryal Butonlar */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  border: none;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary {
+  background-color: var(--accent-burgundy);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(45, 106, 79, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-burgundy-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(45, 106, 79, 0.4);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1.5px solid var(--accent-gold);
+}
+
+.btn-secondary:hover {
+  background-color: var(--accent-gold);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+}
+
+/* Sayfa Konteyneri */
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* Section Başlıkları */
+.section-title {
+  font-size: 2.4rem;
+  text-align: center;
+  margin-bottom: 14px;
+  color: var(--text-primary);
+  position: relative;
+  font-weight: 700;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 45px;
+  height: 3px;
+  background-color: var(--accent-gold);
+  margin: 14px auto 0;
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto 52px;
+  font-size: 1.08rem;
+  line-height: 1.6;
+}
+
+/* Kartlar */
+.card {
+  border-radius: 20px;
+  padding: 36px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px var(--shadow-color);
+  border-color: var(--accent-gold);
+}
+
+/* Nefes Egzersizi Animasyonu */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+  }
+  40% {
+    transform: scale(2.2);
+    box-shadow: 0 0 50px rgba(45, 106, 79, 0.55);
+  }
+  60% {
+    transform: scale(2.2);
+    box-shadow: 0 0 50px rgba(45, 106, 79, 0.55);
+  }
+}
+
+.breathing-ring {
+  animation: breathe 10s infinite ease-in-out;
+}
+
+/* Grid Yapıları */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 968px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
