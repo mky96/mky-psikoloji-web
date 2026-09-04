@@ -5,7 +5,6 @@ import {
   MapPin, 
   Phone, 
   Mail, 
-  Clock, 
   BookOpen, 
   ChevronRight, 
   Menu, 
@@ -13,25 +12,9 @@ import {
   Sparkles,
   Shield,
   Activity,
-  Download,
   AlertCircle,
   CheckCircle,
-  HelpCircle,
-  ArrowRight,
-  Lock,
-  Plus,
-  Trash2,
-  Edit,
-  LayoutDashboard,
-  FileText,
-  Settings,
-  UserCheck,
-  LogOut,
-  Music,
-  Video,
-  ExternalLink,
-  Radio,
-  Bookmark
+  ArrowRight
 } from 'lucide-react';
 
 import profileImg from './assets/profile.jpg';
@@ -56,113 +39,12 @@ export default function App() {
   const [scores, setScores] = useState([]);
   const [testResult, setTestResult] = useState(null);
 
-  // Lead Magnet State
-  const [leadEmail, setLeadEmail] = useState('');
-  const [leadSubmitted, setLeadSubmitted] = useState(false);
-
   // Contact Form State
   const [contactData, setContactData] = useState({ name: '', email: '', phone: '', message: '' });
   const [contactSubmitted, setContactSubmitted] = useState(false);
 
   // Accordion State
   const [activeFAQ, setActiveFAQ] = useState(null);
-
-  // ================= ADMIN PANEL STATES =================
-  const [showAdminModal, setShowAdminModal] = useState(false);
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
-  const [adminPassword, setAdminPassword] = useState('');
-  const [adminError, setAdminError] = useState('');
-  const [adminTab, setAdminTab] = useState('weekly'); // weekly, blogs, content, appointments
-
-  // Editable Site Content State
-  const defaultContent = {
-    heroTitle: "Zihinsel Esneklik ve İçsel Huzura Doğru",
-    heroSubtitle: "Hayatın getirdiği zorlukları güvenli ve yargısız bir alanda birlikte ele alıyoruz. Bilimsel temelli modern terapi yöntemleriyle kendinizi yeniden keşfedin.",
-    heroImage: heroBgImg,
-    profileImage: profileImg,
-    aboutTitle: "Uzm. Klinik Psikolog M. Kutluhan Yalçın",
-    aboutBio1: "Lisans ve yüksek lisans eğitimlerimi klinik psikoloji üzerine tamamladıktan sonra, uzun yıllardır bireylerin zihinsel sağlık ve içsel denge yolculuklarında profesyonel destek vermekteyim.",
-    aboutBio2: "Çalışmalarımda Kabul ve Kararlılık Terapisi (ACT), Bilişsel Davranışçı Terapi (BDT) ve EMDR yaklaşımlarını eklektik bir çerçevede uyguluyorum.",
-    phone: "+90 (555) 000 00 00",
-    email: "info@mkutlahanyalcin.com",
-    address: "Caferağa Mah. Moda Cad. No: 120, Kadıköy / İstanbul"
-  };
-
-  const [siteContent, setSiteContent] = useState(() => {
-    const saved = localStorage.getItem('mky_site_content');
-    return saved ? JSON.parse(saved) : defaultContent;
-  });
-
-  // ================= HAFTANIN ÖNERİLERİ STATE =================
-  const defaultWeeklyPicks = {
-    musicTitle: "Haftanın Dinletisi: Weightless - Marconi Union",
-    musicDesc: "Ses terapistleri eşliğinde hazırlanan, kalp ritmini ve stresi 5 dakika içinde %65 oranında azaltan meditatif beste.",
-    musicLink: "https://open.spotify.com/track/6kkwzB6hXLIONkE9Rj1VwZ",
-    videoTitle: "Dr. Andrew Huberman: Sinir Sistemini Anında Sakinleştiren Nöro-Solunum",
-    videoDesc: "Stanford Tıp Fakültesi Nörobiyoloğu Dr. Andrew Huberman'ın 'Physiological Sigh' (Fizyolojik İç Çekme) tekniği açıklaması.",
-    videoLink: "https://www.youtube.com/watch?v=rBdhqBGqiMc",
-    articleTitle: "Psychology Today: Duygusal Dayanıklılığı Artırmanın 4 Nörobilimsel Yolu",
-    articleDesc: "Beynin esneklik yeteneğini (Neuroplasticity) kullanarak günlük zorluklarla başa çıkma stratejileri.",
-    articleLink: "https://www.psychologytoday.com"
-  };
-
-  const [weeklyPicks, setWeeklyPicks] = useState(() => {
-    const saved = localStorage.getItem('mky_weekly_picks');
-    return saved ? JSON.parse(saved) : defaultWeeklyPicks;
-  });
-
-  // Editable Blog Posts State
-  const defaultBlogs = [
-    {
-      id: 1,
-      title: "Kaygı ve Anksiyete ile Başa Çıkmanın 5 Etkili Yolu",
-      category: "Psikoloji & Yaşam",
-      date: "24 Ağustos 2026",
-      summary: "Zihnimiz kontrolü kaybettiğimizi hissettiğinde kaygı yükselir. İşte günlük hayatınızda uygulayabileceğiniz bilimsel teknikler.",
-      content: "Kaygı, tehdit algısına karşı bedenimizin verdiği doğal bir tepkidir..."
-    },
-    {
-      id: 2,
-      title: "Dr. Andrew Huberman Bakış Açısıyla Uyku ve Zihin Sağlığı",
-      category: "Nörobilim & Terapi",
-      date: "18 Ağustos 2026",
-      summary: "Sabah güneş ışığı alma ve sirkadiyen ritmi düzenlemenin stres seviyeleri üzerindeki doğrudan nörolojik etkisi.",
-      content: "Sirkadiyen ritim ve dopamin mekanizmaları zihinsel dinginlik için temeldir..."
-    }
-  ];
-
-  const [blogs, setBlogs] = useState(() => {
-    const saved = localStorage.getItem('mky_blogs');
-    return saved ? JSON.parse(saved) : defaultBlogs;
-  });
-
-  // Appointments List State
-  const [appointments, setAppointments] = useState(() => {
-    const saved = localStorage.getItem('mky_appointments');
-    return saved ? JSON.parse(saved) : [
-      { id: 1, name: "Ayşe Yılmaz", phone: "0532 111 2233", email: "ayse@example.com", message: "Online seans hakkında görüşmek istiyorum.", date: "25.08.2026 14:30" }
-    ];
-  });
-
-  // Persistence Effects
-  useEffect(() => {
-    localStorage.setItem('mky_site_content', JSON.stringify(siteContent));
-  }, [siteContent]);
-
-  useEffect(() => {
-    localStorage.setItem('mky_weekly_picks', JSON.stringify(weeklyPicks));
-  }, [weeklyPicks]);
-
-  useEffect(() => {
-    localStorage.setItem('mky_blogs', JSON.stringify(blogs));
-  }, [blogs]);
-
-  useEffect(() => {
-    localStorage.setItem('mky_appointments', JSON.stringify(appointments));
-  }, [appointments]);
-
-  // Form States
-  const [newBlog, setNewBlog] = useState({ title: '', category: 'Psikoloji', summary: '', content: '' });
 
   const questions = [
     { text: "Son haftalarda kendimi huzursuz, kaygılı veya gergin hissettim.", category: "Anksiyete" },
@@ -246,22 +128,8 @@ export default function App() {
     setTestResult(null);
   };
 
-  const handleLeadSubmit = (e) => {
-    e.preventDefault();
-    if (leadEmail) setLeadSubmitted(true);
-  };
-
   const handleContactSubmit = (e) => {
     e.preventDefault();
-    const newAppt = {
-      id: Date.now(),
-      name: contactData.name,
-      phone: contactData.phone,
-      email: contactData.email,
-      message: contactData.message,
-      date: new Date().toLocaleString('tr-TR')
-    };
-    setAppointments([newAppt, ...appointments]);
     setContactSubmitted(true);
   };
 
@@ -269,42 +137,9 @@ export default function App() {
     setActiveFAQ(activeFAQ === index ? null : index);
   };
 
-  const handleAdminLogin = (e) => {
-    e.preventDefault();
-    if (adminPassword === 'Kutluhan2026!' || adminPassword === 'admin') {
-      setIsAdminLoggedIn(true);
-      setAdminError('');
-    } else {
-      setAdminError('Hatalı şifre! Lütfen şifrenizi kontrol edin.');
-    }
-  };
-
-  const handleAddBlog = (e) => {
-    e.preventDefault();
-    if (!newBlog.title || !newBlog.summary) return;
-    const blogToAdd = {
-      id: Date.now(),
-      title: newBlog.title,
-      category: newBlog.category,
-      date: new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }),
-      summary: newBlog.summary,
-      content: newBlog.content || newBlog.summary
-    };
-    setBlogs([blogToAdd, ...blogs]);
-    setNewBlog({ title: '', category: 'Psikoloji', summary: '', content: '' });
-  };
-
-  const handleDeleteBlog = (id) => {
-    setBlogs(blogs.filter(b => b.id !== id));
-  };
-
-  const handleDeleteAppointment = (id) => {
-    setAppointments(appointments.filter(a => a.id !== id));
-  };
-
   return (
     <div>
-      {/* HEADER & NAVBAR */}
+      {/* HEADER & NAVBAR (TEMİZ SADEMENÜ) */}
       <header className="glass-heavy" style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000, borderBottom: '1px solid var(--border-color)' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -325,13 +160,11 @@ export default function App() {
           </div>
 
           {/* Desktop Nav */}
-          <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '22px' }}>
+          <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
             <a href="#hakkimda" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}>Hakkımda</a>
             <a href="#hizmetler" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}>Hizmetler</a>
-            <a href="#haftanin-onerileri" style={{ color: 'var(--accent-burgundy)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}><Radio size={16} /> Haftanın Önerileri</a>
-            <a href="#nefes" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '4px' }}><Activity size={16} /> Nefes</a>
+            <a href="#nefes" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '4px' }}><Activity size={16} /> Nefes Egzersizi</a>
             <a href="#test" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}>Stres Testi</a>
-            <a href="#blog" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}>Blog</a>
             <a href="#iletisim" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}>İletişim</a>
             
             <button 
@@ -342,21 +175,10 @@ export default function App() {
               {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
             </button>
 
-            <button 
-              onClick={() => setShowAdminModal(true)}
-              className="btn btn-secondary"
-              style={{ padding: '6px 12px', fontSize: '0.8rem', gap: '6px' }}
-            >
-              <Lock size={14} /> Yönetim Paneli
-            </button>
-
-            <a href="#iletisim" className="btn btn-primary" style={{ padding: '8px 18px', fontSize: '0.85rem' }}>Randevu Al</a>
+            <a href="#iletisim" className="btn btn-primary" style={{ padding: '8px 22px', fontSize: '0.85rem' }}>Randevu Al</a>
           </nav>
 
           <div className="mobile-nav-toggle" style={{ display: 'none', gap: '12px', alignItems: 'center' }}>
-            <button onClick={() => setShowAdminModal(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--accent-gold)' }} title="Yönetim Paneli">
-              <Lock size={20} />
-            </button>
             <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-primary)' }}>
               {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
             </button>
@@ -371,21 +193,17 @@ export default function App() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <a href="#hakkimda" onClick={() => setNavOpen(false)} style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '1rem' }}>Hakkımda</a>
               <a href="#hizmetler" onClick={() => setNavOpen(false)} style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '1rem' }}>Hizmetler</a>
-              <a href="#haftanin-onerileri" onClick={() => setNavOpen(false)} style={{ color: 'var(--accent-burgundy)', textDecoration: 'none', fontSize: '1rem', fontWeight: 600 }}>Haftanın Önerileri</a>
               <a href="#nefes" onClick={() => setNavOpen(false)} style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '1rem' }}>Nefes Egzersizi</a>
               <a href="#test" onClick={() => setNavOpen(false)} style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '1rem' }}>Stres Testi</a>
-              <a href="#blog" onClick={() => setNavOpen(false)} style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '1rem' }}>Blog</a>
               <a href="#iletisim" onClick={() => setNavOpen(false)} style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '1rem' }}>İletişim</a>
-              <button onClick={() => { setNavOpen(false); setShowAdminModal(true); }} className="btn btn-secondary" style={{ justifyContent: 'center' }}>
-                <Lock size={16} /> Yönetim Paneli
-              </button>
+              <a href="#iletisim" onClick={() => setNavOpen(false)} className="btn btn-primary" style={{ textAlign: 'center' }}>Randevu Al</a>
             </div>
           </div>
         )}
       </header>
 
       <style>{`
-        @media (max-width: 960px) {
+        @media (max-width: 900px) {
           .desktop-nav { display: none !important; }
           .mobile-nav-toggle { display: flex !important; }
         }
@@ -395,7 +213,7 @@ export default function App() {
       <section style={{ 
         position: 'relative', 
         padding: '180px 0 100px 0', 
-        backgroundImage: `linear-gradient(to bottom, rgba(244, 247, 246, 0.4), var(--bg-primary)), url("${siteContent.heroImage}")`,
+        backgroundImage: `linear-gradient(to bottom, rgba(242, 246, 244, 0.4), var(--bg-primary)), url("${heroBgImg}")`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '85vh',
@@ -407,135 +225,52 @@ export default function App() {
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="grid-2" style={{ alignItems: 'center' }}>
             <div>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '50px', background: 'rgba(197, 168, 128, 0.12)', color: 'var(--accent-burgundy)', fontSize: '0.85rem', fontWeight: 600, marginBottom: '20px' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '50px', background: 'rgba(45, 106, 79, 0.12)', color: 'var(--accent-burgundy)', fontSize: '0.85rem', fontWeight: 600, marginBottom: '20px' }}>
                 <Sparkles size={14} />
                 <span>Kabul ve Kararlılık Odaklı Psikoterapi</span>
               </div>
               <h2 style={{ fontSize: '3rem', lineHeight: '1.2', color: 'var(--text-primary)', marginBottom: '24px', fontWeight: 700 }}>
-                {siteContent.heroTitle}
+                Zihinsel Esneklik ve <br />
+                <span style={{ color: 'var(--accent-burgundy)' }}>İçsel Huzura</span> Doğru
               </h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '32px', maxWidth: '540px' }}>
-                {siteContent.heroSubtitle}
+                Hayatın getirdiği zorlukları güvenli ve yargısız bir alanda birlikte ele alıyoruz. Bilimsel temelli modern terapi yöntemleriyle kendinizi yeniden keşfedin.
               </p>
               <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
                 <a href="#iletisim" className="btn btn-primary">
                   İlk Seansı Planla <ArrowRight size={16} />
                 </a>
-                <a href="#haftanin-onerileri" className="btn btn-secondary">
-                  Haftanın Önerilerini İncele
+                <a href="#nefes" className="btn btn-secondary">
+                  Nefes Egzersizi Yap
                 </a>
               </div>
             </div>
             
+            {/* PORTRE KARTI (KENDİ FOTOĞRAFINIZ) */}
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <div className="glass card" style={{ maxWidth: '420px', padding: '40px', border: '1px solid var(--border-color)', borderRadius: '24px' }}>
-                <h3 style={{ fontSize: '1.4rem', color: 'var(--text-primary)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <Shield style={{ color: 'var(--accent-gold)' }} /> Etik & Gizlilik
-                </h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '20px' }}>
-                  Tüm seanslarımız Türk Psikologlar Derneği etik kurallarına ve en katı gizlilik/KVKK standartlarına tam uyum içerisinde gerçekleştirilmektedir.
-                </p>
-                <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div className="glass card" style={{ maxWidth: '420px', padding: '16px', border: '1px solid var(--border-color)', borderRadius: '24px' }}>
+                <img 
+                  src={profileImg} 
+                  alt="Uzm. Kln. Psk. M. Kutluhan Yalçın" 
+                  style={{ width: '100%', height: '360px', objectFit: 'cover', borderRadius: '18px' }} 
+                />
+                <div style={{ padding: '16px 8px 8px 8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0 }}>Seans Türleri</p>
-                    <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>Yüz Yüze & Online</p>
+                    <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)', margin: 0 }}>Uzm. Kln. Psk. M. Kutluhan Yalçın</h3>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0 }}>Klinik Psikolog & Terapi Uzmanı</p>
                   </div>
-                  <div style={{ textAlign: 'right' }}>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0 }}>Ofis Konumu</p>
-                    <p style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>Kadıköy, İstanbul</p>
-                  </div>
+                  <span style={{ padding: '6px 12px', borderRadius: '50px', background: 'rgba(45, 106, 79, 0.12)', color: 'var(--accent-burgundy)', fontSize: '0.75rem', fontWeight: 600 }}>
+                    Aktif Danışan Kabulü
+                  </span>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* HAFTANIN ÖNERİLERİ (WEEKLY PICKS: MUSIC, VIDEO & ARTICLE RECOMMENDATIONS) */}
-      {/* ========================================================================= */}
-      <section id="haftanin-onerileri" style={{ padding: '100px 0', background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 16px', borderRadius: '50px', background: 'rgba(128, 0, 32, 0.08)', color: 'var(--accent-burgundy)', fontSize: '0.85rem', fontWeight: 600, marginBottom: '12px' }}>
-              <Radio size={16} />
-              <span>Haftalık İlham & Kültür Köşesi</span>
-            </div>
-            <h2 className="section-title">Haftanın Seçkileri</h2>
-            <p className="section-subtitle" style={{ marginBottom: 0 }}>
-              Zihninizi dinlendirecek, ruh sağlığınızı destekleyecek ve nörobilim perspektifinizi genişletecek haftalık önerilerimiz.
-            </p>
-          </div>
-
-          <div className="grid-3">
-            {/* 1. HAFTANIN MÜZİĞİ */}
-            <div className="glass card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderTop: '4px solid var(--accent-gold)' }}>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', color: 'var(--accent-gold)' }}>
-                  <Music size={24} />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Haftanın Müziği</span>
-                </div>
-                <h3 style={{ fontSize: '1.25rem', marginBottom: '12px', color: 'var(--text-primary)' }}>{weeklyPicks.musicTitle}</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>{weeklyPicks.musicDesc}</p>
-              </div>
-              <a 
-                href={weeklyPicks.musicLink} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn btn-secondary"
-                style={{ marginTop: '24px', justifyContent: 'center', fontSize: '0.85rem' }}
-              >
-                Dinle / Dinletiye Git <ExternalLink size={14} />
-              </a>
-            </div>
-
-            {/* 2. HAFTANIN VİDEOSU / PODCASTİ */}
-            <div className="glass card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderTop: '4px solid var(--accent-burgundy)' }}>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', color: 'var(--accent-burgundy)' }}>
-                  <Video size={24} />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Haftanın Videosu</span>
-                </div>
-                <h3 style={{ fontSize: '1.25rem', marginBottom: '12px', color: 'var(--text-primary)' }}>{weeklyPicks.videoTitle}</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>{weeklyPicks.videoDesc}</p>
-              </div>
-              <a 
-                href={weeklyPicks.videoLink} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn btn-primary"
-                style={{ marginTop: '24px', justifyContent: 'center', fontSize: '0.85rem' }}
-              >
-                İzle / Konuşmayı Dinle <ExternalLink size={14} />
-              </a>
-            </div>
-
-            {/* 3. HAFTANIN MAKALELERİ (PSYCHOLOGY TODAY & HUBERMAN READS) */}
-            <div className="glass card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderTop: '4px solid var(--text-primary)' }}>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', color: 'var(--text-primary)' }}>
-                  <Bookmark size={24} />
-                  <span style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Haftanın Makalesi</span>
-                </div>
-                <h3 style={{ fontSize: '1.25rem', marginBottom: '12px', color: 'var(--text-primary)' }}>{weeklyPicks.articleTitle}</h3>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>{weeklyPicks.articleDesc}</p>
-              </div>
-              <a 
-                href={weeklyPicks.articleLink} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn btn-secondary"
-                style={{ marginTop: '24px', justifyContent: 'center', fontSize: '0.85rem' }}
-              >
-                Makaleyi Oku <ExternalLink size={14} />
-              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* NEFES EGZERSİZİ */}
-      <section id="nefes" style={{ padding: '100px 0', background: 'var(--bg-primary)' }}>
+      <section id="nefes" style={{ padding: '100px 0', background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}>
         <div className="container">
           <h2 className="section-title">Meditatif Nefes Alanı</h2>
           <p className="section-subtitle">
@@ -556,7 +291,7 @@ export default function App() {
                   alignItems: 'center',
                   marginBottom: '40px',
                   transition: 'all 0.5s ease',
-                  backgroundColor: 'rgba(197, 168, 128, 0.05)'
+                  backgroundColor: 'rgba(45, 106, 79, 0.05)'
                 }}
               >
                 <div style={{
@@ -611,7 +346,7 @@ export default function App() {
       </section>
 
       {/* STRES TESTİ */}
-      <section id="test" style={{ padding: '100px 0', background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}>
+      <section id="test" style={{ padding: '100px 0', background: 'var(--bg-primary)' }}>
         <div className="container">
           <h2 className="section-title">Hızlı Stres Ölçeği</h2>
           <p className="section-subtitle">
@@ -638,11 +373,11 @@ export default function App() {
                   <p style={{ color: 'var(--text-secondary)' }}>Skorunuz: <strong>{testResult.score} / 18</strong></p>
                   
                   <div style={{ 
-                    background: 'rgba(197, 168, 128, 0.1)', 
+                    background: 'rgba(45, 106, 79, 0.1)', 
                     padding: '24px', 
                     borderRadius: '12px', 
                     margin: '24px 0',
-                    borderLeft: '4px solid var(--accent-gold)'
+                    borderLeft: '4px solid var(--accent-burgundy)'
                   }}>
                     <h4 style={{ color: 'var(--accent-burgundy)', marginBottom: '8px', fontSize: '1.2rem' }}>{testResult.classification}</h4>
                     <p style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text-primary)' }}>{testResult.feedback}</p>
@@ -700,34 +435,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* BLOG SECTION */}
-      <section id="blog" style={{ padding: '100px 0', background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)' }}>
-        <div className="container">
-          <h2 className="section-title">Blog & Makaleler</h2>
-          <p className="section-subtitle">Ruh sağlığı, kaygı yönetimi ve kişisel farkındalık üzerine kaleme aldığımız güncel yazılar.</p>
-
-          <div className="grid-2">
-            {blogs.map((b) => (
-              <div key={b.id} className="glass card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--accent-gold)', textTransform: 'uppercase' }}>{b.category}</span>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{b.date}</span>
-                  </div>
-                  <h3 style={{ fontSize: '1.3rem', marginBottom: '12px', color: 'var(--text-primary)' }}>{b.title}</h3>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>{b.summary}</p>
-                </div>
-                <div style={{ marginTop: '24px', borderTop: '1px solid var(--border-color)', paddingTop: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--accent-burgundy)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                    Devamını Oku <ChevronRight size={16} />
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* HAKKIMDA */}
       <section id="hakkimda" style={{ padding: '100px 0', background: 'var(--bg-secondary)' }}>
         <div className="container">
@@ -737,20 +444,21 @@ export default function App() {
                 width: '320px',
                 height: '320px',
                 borderRadius: '50%',
-                backgroundImage: `url("${siteContent.profileImage || siteContent.heroImage}")`,
+                backgroundImage: `url("${profileImg}")`,
                 backgroundSize: 'cover',
+                backgroundPosition: 'center',
                 border: '8px solid var(--bg-primary)',
                 boxShadow: '0 10px 30px var(--shadow-color)'
               }}></div>
             </div>
 
             <div>
-              <h2 className="section-title" style={{ textAlign: 'left', margin: '0 0 24px 0' }}>{siteContent.aboutTitle}</h2>
+              <h2 className="section-title" style={{ textAlign: 'left', margin: '0 0 24px 0' }}>Uzm. Klinik Psikolog M. Kutluhan Yalçın</h2>
               <p style={{ color: 'var(--text-primary)', marginBottom: '16px', fontSize: '1.05rem' }}>
-                {siteContent.aboutBio1}
+                Lisans ve yüksek lisans eğitimlerimi klinik psikoloji üzerine tamamladıktan sonra, uzun yıllardır bireylerin zihinsel sağlık ve içsel denge yolculuklarında profesyonel destek vermekteyim.
               </p>
               <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>
-                {siteContent.aboutBio2}
+                Çalışmalarımda Kabul ve Kararlılık Terapisi (ACT), Bilişsel Davranışçı Terapi (BDT) ve EMDR yaklaşımlarını eklektik bir çerçevede uygulayarak güvenli bir terapi alanı sunuyorum.
               </p>
 
               <h4 style={{ marginBottom: '12px' }}>Eğitim ve Sertifikalar</h4>
@@ -764,8 +472,47 @@ export default function App() {
         </div>
       </section>
 
-      {/* İLETİŞİM */}
-      <section id="iletisim" style={{ padding: '100px 0', background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)' }}>
+      {/* HİZMETLER */}
+      <section id="hizmetler" style={{ padding: '100px 0', background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)' }}>
+        <div className="container">
+          <h2 className="section-title">Hizmetlerimiz</h2>
+          <p className="section-subtitle">Bilimsel temelli ve kişiye özel yapılandırılan psikoterapi süreçleri.</p>
+
+          <div className="grid-3">
+            {[
+              { title: "Bireysel Psikoterapi", desc: "Depresyon, kaygı bozuklukları, travma ve günlük yaşam stresleriyle başa çıkmanız için kişiye özel terapi seansları." },
+              { title: "Online Terapi", desc: "Dünyanın her yerinden, güvenli dijital platformlar üzerinden seans alma imkanı ile sınırları ortadan kaldıran terapi seçeneği." },
+              { title: "Çift & Aile Danışmanlığı", desc: "İlişkilerde iletişim sorunları, çatışmalar ve uyum zorluklarını çözmeye yönelik çift odaklı destek." }
+            ].map((srv, idx) => (
+              <div key={idx} className="glass card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ 
+                    backgroundColor: 'rgba(45, 106, 79, 0.1)', 
+                    color: 'var(--accent-burgundy)', 
+                    width: '48px', 
+                    height: '48px', 
+                    borderRadius: '12px', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    marginBottom: '20px'
+                  }}>
+                    <Activity size={24} />
+                  </div>
+                  <h3 style={{ fontSize: '1.25rem', marginBottom: '12px', color: 'var(--text-primary)' }}>{srv.title}</h3>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>{srv.desc}</p>
+                </div>
+                <a href="#iletisim" style={{ marginTop: '24px', display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none', color: 'var(--accent-burgundy)', fontSize: '0.9rem', fontWeight: 600 }}>
+                  Detaylı Bilgi <ChevronRight size={16} />
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* İLETİŞİM & SSS */}
+      <section id="iletisim" style={{ padding: '100px 0', background: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}>
         <div className="container">
           <div className="grid-2">
             <div>
@@ -810,7 +557,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Contact Form */}
+            {/* Randevu Formu */}
             <div className="glass-heavy card" style={{ borderRadius: '24px' }}>
               <h3 style={{ fontSize: '1.6rem', marginBottom: '24px' }}>Randevu Ön Başvurusu</h3>
               
@@ -864,9 +611,9 @@ export default function App() {
               )}
 
               <div style={{ marginTop: '24px', borderTop: '1px solid var(--border-color)', paddingTop: '20px', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Phone size={14} style={{ color: 'var(--accent-gold)' }} /> {siteContent.phone}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Mail size={14} style={{ color: 'var(--accent-gold)' }} /> {siteContent.email}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><MapPin size={14} style={{ color: 'var(--accent-gold)' }} /> {siteContent.address}</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Phone size={14} style={{ color: 'var(--accent-gold)' }} /> +90 (555) 000 00 00</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Mail size={14} style={{ color: 'var(--accent-gold)' }} /> info@mkutlahanyalcin.com</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><MapPin size={14} style={{ color: 'var(--accent-gold)' }} /> Caferağa Mah. Moda Cad. No: 120, Kadıköy / İstanbul</div>
               </div>
             </div>
           </div>
@@ -875,387 +622,10 @@ export default function App() {
 
       {/* FOOTER */}
       <footer style={{ background: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)', padding: '40px 0', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-        <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-            <span>© {new Date().getFullYear()} Uzm. Kln. Psk. M. Kutluhan Yalçın</span>
-            <span>•</span>
-            <button 
-              onClick={() => setShowAdminModal(true)}
-              style={{ background: 'none', border: 'none', color: 'var(--accent-gold)', cursor: 'pointer', fontSize: '0.85rem', textDecoration: 'underline' }}
-            >
-              Yönetici Paneli Girişi
-            </button>
-          </div>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <span>© {new Date().getFullYear()} Uzm. Kln. Psk. M. Kutluhan Yalçın. Tüm hakları saklıdır.</span>
         </div>
       </footer>
-
-      {/* ========================================================================= */}
-      {/* YÖNETİCİ PANELİ MODAL (ADMIN CMS INTERFACE) */}
-      {/* ========================================================================= */}
-      {showAdminModal && (
-        <div style={{
-          position: 'fixed',
-          inset: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          backdropFilter: 'blur(8px)',
-          zIndex: 2000,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '20px'
-        }}>
-          <div className="glass-heavy" style={{
-            width: '100%',
-            maxWidth: isAdminLoggedIn ? '920px' : '400px',
-            maxHeight: '90vh',
-            overflowY: 'auto',
-            borderRadius: '24px',
-            padding: '32px',
-            position: 'relative',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
-          }}>
-            <button 
-              onClick={() => setShowAdminModal(false)}
-              style={{ position: 'absolute', top: '20px', right: '20px', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-primary)' }}
-            >
-              <X size={24} />
-            </button>
-
-            {!isAdminLoggedIn ? (
-              /* LOGIN SCREEN */
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ width: '56px', height: '56px', borderRadius: '50%', backgroundColor: 'rgba(197, 168, 128, 0.15)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-gold)', marginBottom: '16px' }}>
-                  <Lock size={28} />
-                </div>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '8px', color: 'var(--text-primary)' }}>Yönetici Paneli Girişi</h3>
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '24px' }}>
-                  İçerikleri ve haftalık önerileri yönetmek için şifrenizi girin.
-                </p>
-
-                <form onSubmit={handleAdminLogin} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  <input 
-                    type="password" 
-                    placeholder="Yönetici Şifreniz..."
-                    required
-                    value={adminPassword}
-                    onChange={(e) => setAdminPassword(e.target.value)}
-                    style={{
-                      padding: '14px',
-                      borderRadius: '10px',
-                      border: '1px solid var(--border-color)',
-                      background: 'var(--bg-primary)',
-                      color: 'var(--text-primary)',
-                      fontSize: '1rem',
-                      outline: 'none',
-                      textAlign: 'center'
-                    }}
-                  />
-
-                  {adminError && <p style={{ color: '#e74c3c', fontSize: '0.85rem', margin: 0 }}>{adminError}</p>}
-
-                  <button type="submit" className="btn btn-primary" style={{ justifyContent: 'center', padding: '12px' }}>
-                    Giriş Yap
-                  </button>
-                </form>
-              </div>
-            ) : (
-              /* DASHBOARD SCREEN */
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' }}>
-                  <div>
-                    <h3 style={{ fontSize: '1.4rem', margin: 0, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <LayoutDashboard style={{ color: 'var(--accent-gold)' }} /> Site Yönetim Paneli
-                    </h3>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0 }}>Metinleri, haftalık önerileri ve randevuları düzenleyin.</p>
-                  </div>
-                  <button 
-                    onClick={() => setIsAdminLoggedIn(false)} 
-                    className="btn btn-secondary" 
-                    style={{ padding: '6px 12px', fontSize: '0.8rem', gap: '4px' }}
-                  >
-                    <LogOut size={14} /> Çıkış Yap
-                  </button>
-                </div>
-
-                {/* Tabs */}
-                <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', flexWrap: 'wrap' }}>
-                  <button 
-                    onClick={() => setAdminTab('weekly')}
-                    className={`btn ${adminTab === 'weekly' ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ fontSize: '0.85rem', padding: '8px 14px' }}
-                  >
-                    <Radio size={16} /> Haftanın Önerilerini Düzenle
-                  </button>
-                  <button 
-                    onClick={() => setAdminTab('blogs')}
-                    className={`btn ${adminTab === 'blogs' ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ fontSize: '0.85rem', padding: '8px 14px' }}
-                  >
-                    <FileText size={16} /> Blog Yazıları ({blogs.length})
-                  </button>
-                  <button 
-                    onClick={() => setAdminTab('content')}
-                    className={`btn ${adminTab === 'content' ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ fontSize: '0.85rem', padding: '8px 14px' }}
-                  >
-                    <Settings size={16} /> Site Metinleri
-                  </button>
-                  <button 
-                    onClick={() => setAdminTab('appointments')}
-                    className={`btn ${adminTab === 'appointments' ? 'btn-primary' : 'btn-secondary'}`}
-                    style={{ fontSize: '0.85rem', padding: '8px 14px' }}
-                  >
-                    <UserCheck size={16} /> Randevular ({appointments.length})
-                  </button>
-                </div>
-
-                {/* TAB: WEEKLY PICKS EDITING */}
-                {adminTab === 'weekly' && (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <div className="glass" style={{ padding: '20px', borderRadius: '16px' }}>
-                      <h4 style={{ color: 'var(--accent-gold)', marginBottom: '12px', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Music size={18} /> Haftanın Müziği
-                      </h4>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        <input 
-                          type="text" 
-                          placeholder="Müzik Başlığı..."
-                          value={weeklyPicks.musicTitle}
-                          onChange={(e) => setWeeklyPicks({ ...weeklyPicks, musicTitle: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-                        <textarea 
-                          rows="2"
-                          placeholder="Müzik Açıklaması..."
-                          value={weeklyPicks.musicDesc}
-                          onChange={(e) => setWeeklyPicks({ ...weeklyPicks, musicDesc: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-                        <input 
-                          type="text" 
-                          placeholder="Spotify / YouTube Linki..."
-                          value={weeklyPicks.musicLink}
-                          onChange={(e) => setWeeklyPicks({ ...weeklyPicks, musicLink: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="glass" style={{ padding: '20px', borderRadius: '16px' }}>
-                      <h4 style={{ color: 'var(--accent-burgundy)', marginBottom: '12px', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Video size={18} /> Haftanın Videosu (Andrew Huberman vb.)
-                      </h4>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        <input 
-                          type="text" 
-                          placeholder="Video / Podcast Başlığı..."
-                          value={weeklyPicks.videoTitle}
-                          onChange={(e) => setWeeklyPicks({ ...weeklyPicks, videoTitle: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-                        <textarea 
-                          rows="2"
-                          placeholder="Video Açıklaması..."
-                          value={weeklyPicks.videoDesc}
-                          onChange={(e) => setWeeklyPicks({ ...weeklyPicks, videoDesc: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-                        <input 
-                          type="text" 
-                          placeholder="YouTube Video Linki..."
-                          value={weeklyPicks.videoLink}
-                          onChange={(e) => setWeeklyPicks({ ...weeklyPicks, videoLink: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="glass" style={{ padding: '20px', borderRadius: '16px' }}>
-                      <h4 style={{ color: 'var(--text-primary)', marginBottom: '12px', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Bookmark size={18} /> Haftanın Makalesi (Psychology Today vb.)
-                      </h4>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        <input 
-                          type="text" 
-                          placeholder="Makale Başlığı..."
-                          value={weeklyPicks.articleTitle}
-                          onChange={(e) => setWeeklyPicks({ ...weeklyPicks, articleTitle: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-                        <textarea 
-                          rows="2"
-                          placeholder="Makale Özeti..."
-                          value={weeklyPicks.articleDesc}
-                          onChange={(e) => setWeeklyPicks({ ...weeklyPicks, articleDesc: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-                        <input 
-                          type="text" 
-                          placeholder="Makale Web Bağlantısı (URL)..."
-                          value={weeklyPicks.articleLink}
-                          onChange={(e) => setWeeklyPicks({ ...weeklyPicks, articleLink: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* TAB: BLOG MANAGEMENT */}
-                {adminTab === 'blogs' && (
-                  <div>
-                    <div className="glass" style={{ padding: '20px', borderRadius: '16px', marginBottom: '24px' }}>
-                      <h4 style={{ fontSize: '1rem', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Plus size={16} style={{ color: 'var(--accent-gold)' }} /> Yeni Blog Yazısı Ekle
-                      </h4>
-                      <form onSubmit={handleAddBlog} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '12px' }}>
-                          <input 
-                            type="text" 
-                            placeholder="Makale Başığı..."
-                            required
-                            value={newBlog.title}
-                            onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
-                            style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                          />
-                          <input 
-                            type="text" 
-                            placeholder="Kategori (Örn: Nörobilim)"
-                            value={newBlog.category}
-                            onChange={(e) => setNewBlog({ ...newBlog, category: e.target.value })}
-                            style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                          />
-                        </div>
-                        <textarea 
-                          placeholder="Kısa Özet..."
-                          rows="2"
-                          required
-                          value={newBlog.summary}
-                          onChange={(e) => setNewBlog({ ...newBlog, summary: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-                        <button type="submit" className="btn btn-primary" style={{ alignSelf: 'flex-start', padding: '8px 20px', fontSize: '0.85rem' }}>
-                          Makaleyi Yayınla
-                        </button>
-                      </form>
-                    </div>
-
-                    <h4 style={{ fontSize: '1rem', marginBottom: '12px' }}>Mevcut Blog Yazıları</h4>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                      {blogs.map((b) => (
-                        <div key={b.id} className="glass" style={{ padding: '16px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <div>
-                            <h5 style={{ margin: '0 0 4px 0', fontSize: '1rem', color: 'var(--text-primary)' }}>{b.title}</h5>
-                            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{b.category} • {b.date}</span>
-                          </div>
-                          <button onClick={() => handleDeleteBlog(b.id)} style={{ background: 'none', border: 'none', color: '#e74c3c', cursor: 'pointer' }} title="Sil">
-                            <Trash2 size={18} />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* TAB: SITE CONTENT */}
-                {adminTab === 'content' && (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <div className="glass" style={{ padding: '20px', borderRadius: '16px' }}>
-                      <h4 style={{ marginBottom: '12px', fontSize: '1rem' }}>Ana Sayfa Başlıkları</h4>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                        <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Ana Başlık</label>
-                        <input 
-                          type="text" 
-                          value={siteContent.heroTitle}
-                          onChange={(e) => setSiteContent({ ...siteContent, heroTitle: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-
-                        <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Alt Açıklama Metni</label>
-                        <textarea 
-                          rows="3"
-                          value={siteContent.heroSubtitle}
-                          onChange={(e) => setSiteContent({ ...siteContent, heroSubtitle: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-
-                        <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Kendi Profil Fotoğrafınızın Bağlantısı (URL)</label>
-                        <input 
-                          type="text" 
-                          placeholder="Fotoğrafınızın URL adresi (örn: https://... veya /images/profil.jpg)"
-                          value={siteContent.profileImage || ''}
-                          onChange={(e) => setSiteContent({ ...siteContent, profileImage: e.target.value })}
-                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="glass" style={{ padding: '20px', borderRadius: '16px' }}>
-                      <h4 style={{ marginBottom: '12px', fontSize: '1rem' }}>İletişim Bilgileri</h4>
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                        <div>
-                          <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Telefon</label>
-                          <input 
-                            type="text" 
-                            value={siteContent.phone}
-                            onChange={(e) => setSiteContent({ ...siteContent, phone: e.target.value })}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                          />
-                        </div>
-                        <div>
-                          <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>E-posta</label>
-                          <input 
-                            type="text" 
-                            value={siteContent.email}
-                            onChange={(e) => setSiteContent({ ...siteContent, email: e.target.value })}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* TAB: APPOINTMENTS */}
-                {adminTab === 'appointments' && (
-                  <div>
-                    <h4 style={{ fontSize: '1rem', marginBottom: '16px' }}>Gelen Randevu Talepleri</h4>
-                    {appointments.length === 0 ? (
-                      <p style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '20px 0' }}>Henüz randevu talebi bulunmuyor.</p>
-                    ) : (
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                        {appointments.map((app) => (
-                          <div key={app.id} className="glass" style={{ padding: '16px', borderRadius: '12px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                              <h5 style={{ margin: 0, fontSize: '1.05rem', color: 'var(--accent-burgundy)' }}>{app.name}</h5>
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{app.date}</span>
-                                <button onClick={() => handleDeleteAppointment(app.id)} style={{ background: 'none', border: 'none', color: '#e74c3c', cursor: 'pointer' }}>
-                                  <Trash2 size={16} />
-                                </button>
-                              </div>
-                            </div>
-                            <p style={{ margin: '0 0 6px 0', fontSize: '0.85rem', color: 'var(--text-primary)' }}>
-                              📞 {app.phone} | ✉️ {app.email}
-                            </p>
-                            {app.message && (
-                              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)', fontStyle: 'italic', background: 'rgba(0,0,0,0.03)', padding: '8px', borderRadius: '6px' }}>
-                                "{app.message}"
-                              </p>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
     </div>
   );
 }
