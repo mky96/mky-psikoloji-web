@@ -34,6 +34,10 @@ import {
   Bookmark
 } from 'lucide-react';
 
+import profileImg from './assets/profile.jpg';
+import heroBgImg from './assets/hero_bg.png';
+import therapySessionImg from './assets/therapy_session.png';
+
 export default function App() {
   // Theme State
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
@@ -74,7 +78,8 @@ export default function App() {
   const defaultContent = {
     heroTitle: "Zihinsel Esneklik ve İçsel Huzura Doğru",
     heroSubtitle: "Hayatın getirdiği zorlukları güvenli ve yargısız bir alanda birlikte ele alıyoruz. Bilimsel temelli modern terapi yöntemleriyle kendinizi yeniden keşfedin.",
-    heroImage: "/images/relaxing_nature.png",
+    heroImage: heroBgImg,
+    profileImage: profileImg,
     aboutTitle: "Uzm. Klinik Psikolog M. Kutluhan Yalçın",
     aboutBio1: "Lisans ve yüksek lisans eğitimlerimi klinik psikoloji üzerine tamamladıktan sonra, uzun yıllardır bireylerin zihinsel sağlık ve içsel denge yolculuklarında profesyonel destek vermekteyim.",
     aboutBio2: "Çalışmalarımda Kabul ve Kararlılık Terapisi (ACT), Bilişsel Davranışçı Terapi (BDT) ve EMDR yaklaşımlarını eklektik bir çerçevede uyguluyorum.",
@@ -732,7 +737,7 @@ export default function App() {
                 width: '320px',
                 height: '320px',
                 borderRadius: '50%',
-                backgroundImage: `url("${siteContent.heroImage}")`,
+                backgroundImage: `url("${siteContent.profileImage || siteContent.heroImage}")`,
                 backgroundSize: 'cover',
                 border: '8px solid var(--bg-primary)',
                 boxShadow: '0 10px 30px var(--shadow-color)'
@@ -1171,6 +1176,15 @@ export default function App() {
                           rows="3"
                           value={siteContent.heroSubtitle}
                           onChange={(e) => setSiteContent({ ...siteContent, heroSubtitle: e.target.value })}
+                          style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
+                        />
+
+                        <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Kendi Profil Fotoğrafınızın Bağlantısı (URL)</label>
+                        <input 
+                          type="text" 
+                          placeholder="Fotoğrafınızın URL adresi (örn: https://... veya /images/profil.jpg)"
+                          value={siteContent.profileImage || ''}
+                          onChange={(e) => setSiteContent({ ...siteContent, profileImage: e.target.value })}
                           style={{ padding: '10px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}
                         />
                       </div>

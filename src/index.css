@@ -1,32 +1,32 @@
 :root {
-  /* Renk Paleti - Aydınlık Mod (Orijinal Tema: Antrasit, Bordo & Altın) */
-  --bg-primary: #f4f7f6;
+  /* Renk Paleti - Sakinleştirici Orman/Adaçayı Yeşili & Yumuşak Altın */
+  --bg-primary: #f2f6f4; /* Soft Adaçayı Zemin */
   --bg-secondary: #ffffff;
-  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-glass: rgba(255, 255, 255, 0.75);
   --bg-glass-heavy: rgba(255, 255, 255, 0.95);
-  --text-primary: #2c3e50; /* Antrasit */
-  --text-secondary: #5a738e;
+  --text-primary: #1f2d27; /* Derin Koyu Antrasit-Yeşil */
+  --text-secondary: #4a6358;
   --accent-gold: #c5a880; /* Yumuşak Altın */
   --accent-gold-hover: #b0926a;
-  --accent-burgundy: #800020; /* Derin Bordo */
-  --accent-burgundy-hover: #600018;
-  --border-color: rgba(197, 168, 128, 0.2);
-  --shadow-color: rgba(44, 62, 80, 0.06);
+  --accent-burgundy: #2d6a4f; /* Doğal Orman/Adaçayı Yeşili */
+  --accent-burgundy-hover: #1b4332;
+  --border-color: rgba(45, 106, 79, 0.15);
+  --shadow-color: rgba(31, 45, 39, 0.06);
   --transition-speed: 0.3s;
 }
 
 [data-theme='dark'] {
-  /* Renk Paleti - Karanlık Mod (Koyu Antrasit & Altın) */
-  --bg-primary: #121820; /* Soft Koyu Antrasit */
-  --bg-secondary: #1a222d;
-  --bg-glass: rgba(26, 34, 45, 0.7);
-  --bg-glass-heavy: rgba(26, 34, 45, 0.95);
-  --text-primary: #e6ebf1;
-  --text-secondary: #a0aec0;
+  /* Renk Paleti - Koyu Gece Ormanı & Altın */
+  --bg-primary: #0f1914; /* Koyu Gece Ormanı */
+  --bg-secondary: #16241d;
+  --bg-glass: rgba(22, 36, 29, 0.75);
+  --bg-glass-heavy: rgba(22, 36, 29, 0.95);
+  --text-primary: #e2ebe6;
+  --text-secondary: #8da69a;
   --accent-gold: #d4af37; /* Parlak Altın */
   --accent-gold-hover: #f3cf65;
-  --accent-burgundy: #a82343; /* Parlak Bordo */
-  --accent-burgundy-hover: #c93b5d;
+  --accent-burgundy: #40916c; /* Canlı Şifa Yeşili */
+  --accent-burgundy-hover: #52b788;
   --border-color: rgba(212, 175, 55, 0.2);
   --shadow-color: rgba(0, 0, 0, 0.3);
 }
@@ -94,7 +94,7 @@ h1, h2, h3, h4, .brand-title {
 .btn-primary:hover {
   background-color: var(--accent-burgundy-hover);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(128, 0, 32, 0.3);
+  box-shadow: 0 5px 15px rgba(45, 106, 79, 0.3);
 }
 
 .btn-secondary {
@@ -164,11 +164,11 @@ h1, h2, h3, h4, .brand-title {
   }
   40% {
     transform: scale(2.2);
-    box-shadow: 0 0 40px rgba(197, 168, 128, 0.5);
+    box-shadow: 0 0 40px rgba(45, 106, 79, 0.5);
   }
   60% {
     transform: scale(2.2);
-    box-shadow: 0 0 40px rgba(197, 168, 128, 0.5);
+    box-shadow: 0 0 40px rgba(45, 106, 79, 0.5);
   }
 }
 
