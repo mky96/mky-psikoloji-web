@@ -1,5 +1,5 @@
 :root {
-  /* Renk Paleti - Aydınlık Mod (Varsayılan) */
+  /* Renk Paleti - Aydınlık Mod (Orijinal Tema: Antrasit, Bordo & Altın) */
   --bg-primary: #f4f7f6;
   --bg-secondary: #ffffff;
   --bg-glass: rgba(255, 255, 255, 0.7);
@@ -16,7 +16,7 @@
 }
 
 [data-theme='dark'] {
-  /* Renk Paleti - Karanlık Mod */
+  /* Renk Paleti - Karanlık Mod (Koyu Antrasit & Altın) */
   --bg-primary: #121820; /* Soft Koyu Antrasit */
   --bg-secondary: #1a222d;
   --bg-glass: rgba(26, 34, 45, 0.7);
